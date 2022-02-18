@@ -6,7 +6,7 @@ export default function Browse() {
   return (
     <>
       <p>Hello from the Browse{`The current user is : ${currentUser}`}</p>;
-      {/* <p>Hello from the Browse{JSON.stringify(currentUser, null, 2)}</p>;
+      <p>Hello from the Browse{JSON.stringify(currentUser, null, 2)}</p>;
       <button
         name="Logout"
         onClick={async (e) => {
@@ -15,7 +15,7 @@ export default function Browse() {
         }}
       >
         logout
-      </button> */}
+      </button>
     </>
   );
 }

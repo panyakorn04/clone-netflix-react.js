@@ -9,11 +9,12 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
+        {/* public routes */}
+        <Route path="signup" element={<SignUp />} />
+        <Route path="signin" element={<SignIn />} />
         {/* redirect routes */}
         <Route element={<IsUserRedirect />}>
           <Route path="/" element={<Home />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="signin" element={<SignIn />} />
         </Route>
         {/* we want to protect these routes */}
         <Route element={<ProtectedRoute />}>
