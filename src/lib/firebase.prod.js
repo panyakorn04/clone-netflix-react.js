@@ -1,6 +1,8 @@
 // v9 compat packages are API
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { seedDatabase } from "../seed";
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCmqNajZYM1EMzmtS2HdRqQ210CrLq3OI4",
@@ -13,7 +15,10 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 
+const db = getFirestore(app);
+
 export const auth = getAuth(app);
+export { db };
 // seedDatabase(firebase);
 
 // apiKey: "AIzaSyCmqNajZYM1EMzmtS2HdRqQ210CrLq3OI4",

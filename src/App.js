@@ -1,25 +1,31 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom"; // import your route components too
-import { Home, Browse, SignIn, SignUp } from "./pages";
+import { Home, Browse, SignIn, SignUp, Unauthorized } from "./pages";
 import * as ROUTES from "./constants/routes";
-import { ProtectedRoute, IsUserRedirect } from "./helpers/routes";
+// import { ProtectedRoute } from "./helpers/routes";
 import { Layout } from "./components";
+
+// const ROLES = {
+//   User: 2001,
+//   Editor: 1984,
+//   Admin: 5150,
+// };
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* public routes */}
-        <Route path="signup" element={<SignUp />} />
+        <Route path="/" element={<Home />} />
+        <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
         <Route path="signin" element={<SignIn />} />
+        <Route path="browse" element={<Browse />} />
+        <Route path="unauthorized" element={<Unauthorized />} />
+
         {/* redirect routes */}
-        <Route element={<IsUserRedirect />}>
-          <Route path="/" element={<Home />} />
-        </Route>
+
         {/* we want to protect these routes */}
-        <Route element={<ProtectedRoute />}>
-          <Route path={ROUTES.BROWSE} element={<Browse />} />
-        </Route>
+
         {/* catch all */}
         <Route path="*" element={<p>page not found</p>} />
       </Route>

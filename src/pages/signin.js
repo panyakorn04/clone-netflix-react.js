@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useMounted from "../hooks/useMounted";
-
 import { HeaderContainer } from "../containers/header";
 import { FooterContainer } from "../containers/footer";
 import { Form } from "../components";
@@ -9,7 +8,7 @@ import * as ROUTES from "../constants/routes";
 import { useAuth } from "../context/AuthContext";
 
 export default function SignIn() {
-  const { SignIn, signInWithGoogle } = useAuth();
+  const { SignIn } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -80,7 +79,7 @@ export default function SignIn() {
               Sign In
             </Form.Submit>
           </Form.Base>
-          <button
+          {/* <button
             onClick={() =>
               signInWithGoogle()
                 .then((user) => console.log(user))
@@ -88,7 +87,7 @@ export default function SignIn() {
             }
           >
             Sign in with Google
-          </button>
+          </button> */}
           <Form.Text>
             New to Netflix? <Form.Link to="/signup">Sign up now.</Form.Link>
           </Form.Text>

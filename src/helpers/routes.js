@@ -1,29 +1,17 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export function IsUserRedirect() {
-  const location = useLocation();
+export function ProtectedRoute({ allowedRoles }) {
   const { currentUser } = useAuth();
+  const location = useLocation();
+
   console.log({ location });
   console.log("Check user in Private: ", currentUser);
-
-  return currentUser ? <Navigate to="browse" /> : <Outlet />;
-}
-
-export function ProtectedRoute() {
-  const location = useLocation();
-  const { currentUser } = useAuth();
-  console.log({ location });
-  console.log("Check user in Private: ", currentUser);
-
-  return currentUser ? (
+  currentUser?.roles?.find((role) => allowedRoles?.includes(role)) ? (
     <Outlet />
+  ) : currentUser?.user ? (
+    <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (
-    <Navigate
-      to={{
-        pathname: "signin",
-        state: { from: location },
-      }}
-    />
+    <Navigate to="/login" state={{ from: location }} replace />
   );
 }

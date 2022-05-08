@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../lib/firebase.prod";
+import { useNavigate } from "react-router-dom";
 
 import {
   createUserWithEmailAndPassword,
@@ -17,16 +18,20 @@ export const AuthContext = createContext({
   SignOut: () => Promise,
   signInWithGoogle: () => Promise,
 });
-
-export const useAuth = () => useContext(AuthContext);
+export function useAuth() {
+  return useContext(AuthContext);
+}
 
 export default function AuthContextProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
-
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("authUser"))
+  );
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user ? user : null);
+      console.log("Auth", user);
+      setCurrentUser(user);
     });
+
     return () => {
       unsubscribe();
     };
@@ -50,7 +55,15 @@ export default function AuthContextProvider({ children }) {
   }
 
   function SignOut() {
-    return signOut(auth);
+    const navigate = useNavigate();
+    return signOut(auth)
+      .then(() => {
+        console.log("logged out");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const value = {

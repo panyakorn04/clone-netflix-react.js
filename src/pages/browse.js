@@ -1,21 +1,23 @@
 import React from "react";
-import { useAuth } from "../context/AuthContext";
+import selectionFilter from "../utils/selection-filter";
+import { useContent } from "../hooks";
 
 export default function Browse() {
-  const { SignOut, currentUser } = useAuth();
+  // const { series } = useContent("series");
+  // const { films } = useContent("films");
+
+  // const slides = selectionFilter({ series, films });
+  // console.log(slides);
+
   return (
-    <>
-      <p>Hello from the Browse{`The current user is : ${currentUser}`}</p>;
-      <p>Hello from the Browse{JSON.stringify(currentUser, null, 2)}</p>;
-      <button
-        name="Logout"
-        onClick={async (e) => {
-          e.preventDefault();
-          await SignOut();
-        }}
-      >
-        logout
-      </button>
-    </>
+    <iframe
+      width="560"
+      height="315"
+      src="https://vimeo.com/693455021"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
   );
 }
